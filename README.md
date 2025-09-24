@@ -1,44 +1,50 @@
-**Структурированное описание:**
+## General Concept
 
-## Общая концепция
-Система рассуждений на основе концептов, атрибутов, взаимоотношений и действий. Вместо сложных 2D/3D систем - максимально простая архитектура для proof-of-concept.
+A reasoning system based on concepts, attributes, relationships, and actions. Instead of complex 2D/3D systems, it uses the simplest possible architecture for a proof-of-concept.
 
-## Архитектура системы
+## System Architecture
 
-### 1. Парсер текста
-- **Вход:** текст ("Алиса в доме. Яблоко в парке")
-- **Функция:** извлечение концептов и взаимоотношений
-- **Выход:** концепты + взаимоотношения (только с явно заданными атрибутами)
+### 1. Text Parser
 
-### 2. Мировая модель
-- **Вход:** концепты + взаимоотношения от парсера
-- **Функция:** присваивание координат X каждому концепту
-- **Выход:** граф состояний с пространственными атрибутами
+* **Input:** text ("Alice is in the house. An apple is in the park")
+* **Function:** extract concepts and relationships
+* **Output:** concepts + relationships (only explicitly defined attributes)
 
-### 3. Анализатор взаимоотношений
-- **Вход:** снапшот мировой модели
-- **Функция:** вычисление актуальных отношений ("что рядом с чем")
-- **Выход:** текущие взаимоотношения
+### 2. World Model
 
-### 4. Исполнитель действий
-- **Вход:** снапшот + параметры действия (только перемещение пока)
-- **Функция:** изменение состояния
-- **Выход:** новый снапшот
+* **Input:** concepts + relationships from the parser
+* **Function:** assign an X coordinate to each concept
+* **Output:** state graph with spatial attributes
 
-### 5. Система целей (будущее)
-- Постановка целей → поиск последовательности действий
-- Причинно-следственный анализ
-- Планирование сложных сценариев
+### 3. Relationship Analyzer
 
-## Примеры работы
-- Начальное: "Алиса в доме" → Алиса.x = 10, дом.x = 10
-- Действие: "переместить(Алиса, парк)" → Алиса.x = 50
-- Анализ: "Алиса в парке" (координаты совпадают)
+* **Input:** snapshot of the world model
+* **Function:** calculate current relationships ("what is next to what")
+* **Output:** current relationships
 
-## Ограничения MVP
-- 5 фиксированных концептов
-- Только координата X
-- Одно действие (перемещение)
-- Без обучения пока
+### 4. Action Executor
 
-**Плюсы:** Простота, модульность, легко тестировать
+* **Input:** snapshot + action parameters (only movement for now)
+* **Function:** change the state
+* **Output:** new snapshot
+
+### 5. Goal System (future)
+
+* Goal setting → search for a sequence of actions
+* Causal analysis
+* Planning of complex scenarios
+
+## Examples of Operation
+
+* Initial: "Alice is in the house" → Alice.x = 10, house.x = 10
+* Action: "move(Alice, park)" → Alice.x = 50
+* Analysis: "Alice is in the park" (coordinates match)
+
+## MVP Limitations
+
+* 5 fixed concepts
+* Only X coordinate
+* Single action (movement)
+* No learning yet
+
+**Pros:** Simplicity, modularity, easy to test
